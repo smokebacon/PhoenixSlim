@@ -1,0 +1,11 @@
+all cities
+curl -i -X GET http://localhost/sites/ICT33A/cities
+
+Return with id=1
+curl -i -X GET http://localhost/sites/ICT33A/cities/1
+
+Add like
+curl -i -X PUT -H 'Content-Type: application/json' -d '{"countryid":"1","cityname":"Melbourne"}' http://localhost/sites/ICT33A/cities/like
+
+Remove Like
+curl -i -X PUT -H 'Content-Type:application/json' -d '{"countryid":"1","cityname":"Melbourne"}' http://localhost/sites/ICT33A/cities/unlike
