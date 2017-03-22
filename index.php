@@ -3,242 +3,433 @@ require '../Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
 
-//GET route
-$app->get('/cities','getCities');
+//GET Route -- Default screen
+$app->get('/', function () {
 
-$app->get('/cities/:id', 'getLikesForCity');
-
-$app->get('/cities/like/most', 'getMost');
-
-$app->get('/cities/like/least', 'getLeast');
-
-//Add a put route
-$app->put('/cities/like','addLike');
-
-$app->put('/cities/unlike','removeLike');
-
-
-
-//GET Route
-$app->get('/',function(){
-
-    $template=<<<EOT
+    $template = <<<EOT
 <!DOCTYPE html>
-    <html><head>
-    <title>404 Page not found</title>
-    <body><h1>404 Page Not Found</h1>
-    <p>The page you are looking for could not be found. Gavin C.</p>
+    <html><head></head>
+    <title>Phoenix Slim App</title>
+    <body><h1>Welcome to Phoenix Slim Web Service!</h1>
+    <p>Panjapol Chiemsombat 100547314</p>
     </body></html>
 EOT;
     echo $template;
 });
 
 
-function getCities(){
+/*--------GET Route------*/
+//GET all from tour table
+//returns JSON
+$app->get('/tour/all', 'getAllTour');
 
-    try
-    {
-        //First we need to get a connection object to the database server.
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = 'root';
-        $dbname = 'likeacity';
-        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+//GET all PENDING status booking details -- Logic -- get only trip with 0 amount of deposit associate with the cust_id
+//accept cust_id
+//returns JSON
+$app->get('/booking/:id', 'getPendingBooking');
 
-        //not lets craft an SQL select string
-        $sql = "SELECT * from citylikes";
-
-        //Make sql string into an SQL statement and execute the statement
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-
-        //fetch records and place in array of objects
-        $row=$stmt->fetchALL(PDO::FETCH_OBJ);
-
-        //IMPORTANT to close connection after you have finished with it.
-        //There could be hundreds of clients connecting to your site.
-        //If you don't close connections to database this could slow you system
-        $dbh = null;
-
-        //return array of objects in JSON format
-        echo json_encode($row);
-    }catch(PDOException $e){
-        echo $e->getMessage();
-    }
-
-}
+//GET all trip details with this customer id -- regardless of deposits
+//Accepts cust_id
+//returns JSON
+$app->get('/yourtrip/:id', 'getAllBooking');
 
 
+/*--------POST Route------*/
+//Register a customer into database
+//Accepts JSON as a detail of created account
+//returns status
+$app->post('/customer/add/', 'addNewCustomer');
 
-function getLikesForCity($id)
+/*--------POST Route------*/
+//Book a trip
+//Accepts JSON as Trip Booking details
+$app->post('/customer/book/','bookNewTrip');
+
+
+//Link a trip to customer
+$app->post('/customer/link/','linkCustomer');
+
+
+/*--------PUT Route------*/
+//Edit Account Info
+//accepts JSON as a detail of edited account
+//returns a status
+$app->put('/customer/edit/', 'editAccountInfo');
+
+
+/*--------DELETE Route------*/
+//Cancel booking
+//Accept trip booking no
+//returns a status
+$app->delete('/booking/delete/', 'deleteBooking');
+
+
+/**
+ * @return PDO
+ * When called this function returns a reference to a PDO database connection object.
+ * change the configuration to access the server
+ */
+function getConnection()
 {
-    try {
-        //First we need to get a connection object to the database server.
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = 'root';
-        $dbname = 'likeacity';
-        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-
-        //not lets craft an SQL select string
-        $sql = "SELECT * from citylikes where id=:id";
-
-        //Make sql string into an SQL statement and execute the statement
-        $stmt=$dbh->prepare($sql);
-        $stmt->bindParam("id",$id);
-        $stmt->execute();
-        $row=$stmt->fetch(PDO::FETCH_OBJ);
-
-        //IMPORTANT to close connection after you have finished with it.
-        //There could be hundreds of clients connecting to your site.
-        //If you don't close connections to database this could slow you system
-        $dbh = null;
-
-        //can simple return the record in json format
-        echo json_encode($row);
-        echo "<br/>";
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
-function getMost(){
-
-    try{
-        //First we need to get a connection object to the database server.
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = 'root';
-        $dbname = 'likeacity';
-        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-
-        //not lets craft an SQL select string
-        $sql = "Select * from citylikes Where Likes in (SELECT Max(likes) as likes from citylikes)";
-
-        $stmt=$dbh->prepare($sql);
-        $stmt->execute();
-        $row=$stmt->fetchALL(PDO::FETCH_OBJ);
-
-        //IMPORTANT
-        $dbh = null;
-        //
-
-        echo json_encode($row);
-        echo "<br/>";
-
-    }catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-
-}
-
-function getLeast()
-{
-
-    try {
-        //First we need to get a connection object to the database server.
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = 'root';
-        $dbname = 'likeacity';
-        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-
-        //not lets craft an SQL select string
-        $sql = "Select * from citylikes Where Likes in (SELECT Min(likes) as likes from citylikes)";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
-
-        //IMPORTANT
-        $dbh = null;
-        //
-
-        echo json_encode($row);
-        echo "<br/>";
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
-
-
-//addlike method
-function addLike(){
-    //Code here
-    //Use slim to get the contents of the HTTP POST request
-    $request = \Slim\Slim::getInstance()->request();
-
-    //the request is in JSON format so we need to decode it
-    $q = json_decode($request->getBody());
-
-    //PDO stuff as usual
-    // Create SQL UPDATE STRING
-    $sql = "UPDATE citylikes set likes=likes + 1 Where countryid = :countryid and cityname= :cityname";
-    try{
-        // encapsulate connection stuff in a function
-        $dbh = getConnection();
-        $stmt=$dbh->prepare($sql);
-        $stmt->bindParam("countryid",$q->countryid);
-        $stmt->bindParam("cityname",$q->cityname);
-        $stmt->execute();
-        $dbh = null;
-    }
-    catch(PDOException $e){
-        echo $e->getMessage();
-    }
-
-
-} //end addLike
-
-
-
-function removeLike(){
-
-    $request = \Slim\Slim::getInstance()->request();
-
-    $q = json_decode($request->getBody());
-
-    $sql = "UPDATE citylikes SET likes=likes - 1 WHERE countryid = :countryid and cityname= :cityname";
-    try{
-        // encapsulate connection stuff in a function
-        $dbh = getConnection();
-        $stmt=$dbh->prepare($sql);
-        $stmt->bindParam("countryid",$q->countryid);
-        $stmt->bindParam("cityname",$q->cityname);
-        $stmt->execute();
-        $dbh = null;
-    }
-    catch(PDOException $e){
-        echo $e->getMessage();
-    }
-
-}
-
-//encapsulate connection stuff in a function.
-//When called this function returnes a reference to a PDO database connection object.
-function getConnection(){
     //Connection details
-    $dbhost="127.0.0.1";
-    $dbUser="root";
-    $dbpass="root";
-    $dbName="likeacity";
+    $dbhost = "127.0.0.1";
+    $dbUser = "root";
+    $dbpass = "root";
+    $dbName = "phoenix";
 
-    try{
+    try {
 
-        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbName",$dbUser,$dbpass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbName", $dbUser, $dbpass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $dbh;
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         echo "Error PDO Exception";
     }
 
 }//End getConnection()
 
 
+//GET Methods
+
+/**
+ * @return JSON of tour table
+ * Get all tour in the database
+ */
+function getAllTour()
+{
+
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT * FROM Tour";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return array of objects in JSON
+        echo json_encode($row);
+    } catch (PDOException $e) {
+        echo $e - getMessage();
+    }
+
+}
+
+/**
+ * @return JSON of trip(s)
+ * @param $id
+ * Get all pending booking of a customer
+ * logic : any booking with 0 amount of deposit is considered pending booking
+ */
+function getPendingBooking($id)
+{
+
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT c.Trip_Booking_No,c.Customer_Id,c.num_concessions,c.num_adults,t.trip_id,t.booking_date,t.Deposit_amount
+                FROM Customer_Booking c JOIN trip_booking t ON c.trip_Booking_No = t.trip_Booking_No
+                WHERE c.Customer_id = :id
+                AND t.deposit_amount = 0";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return array of objects in JSON
+            echo json_encode($row);
+
+
+    } catch (PDOException $e) {
+        echo $e - getMessage();
+    }
+
+}
+
+/**
+ * @return JSON of trip(s)
+ * @param $id
+ * Get all booking of a customer regarding of their pending status
+ * Logic : any booking with or without deposits
+ */
+function getAllBooking($id)
+{
+
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT c.Trip_Booking_No,c.Customer_Id,c.num_concessions,c.num_adults,t.trip_id,t.booking_date,t.Deposit_amount
+                FROM Customer_Booking c JOIN trip_booking t ON c.trip_Booking_No = t.trip_Booking_No
+                WHERE c.Customer_id = :id";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return array of objects in JSON
+        echo json_encode($row);
+
+
+    } catch (PDOException $e) {
+        echo $e - getMessage();
+    }
+}
+
+
+//POST Methods
+/**
+ * @return Status
+ * Get JSON of customer details and INSERT them into databases
+ */
+function addNewCustomer()
+{
+    //Use slim to get HTTP POST contents
+    $request = \Slim\Slim::getInstance()->request();
+
+    //decode JSON
+    $q = json_decode($request->getBody());
+
+    //PDO
+    $sql = "INSERT INTO Customer SET
+            Customer_id = :Customer_id,
+            First_Name = :First_Name,
+            Middle_Initial = :Middle_Initial,
+            Last_Name = :Last_Name,
+            Street_No = :Street_No,
+            Street_Name = :Street_Name,
+            Suburb = :Suburb,
+            Postcode = :Postcode,
+            Email = :Email,
+            Phone = :Phone";
+
+//    $sql = "INSERT INTO Customer VALUES (:Customer_Id,:First_Name,:Middle_Initial,:Last_Name,:Street_No,:Street_Name,:Suburb,:Postcode,:Email,:Phone)";
+
+    try {
+        $dbh = getConnection();
+        $stmt = $dbh->prepare($sql);
+
+        //bind parameters to prevent sql injections
+        $stmt->bindParam("Customer_id", $q->Customer_id);
+        $stmt->bindParam("First_Name", $q->First_Name);
+        $stmt->bindParam("Middle_Initial", $q->Middle_Initial);
+        $stmt->bindParam("Last_Name", $q->Last_Name);
+        $stmt->bindParam("Street_No", $q->Street_No);
+        $stmt->bindParam("Street_Name", $q->Street_Name);
+        $stmt->bindParam("Suburb", $q->Suburb);
+        $stmt->bindParam("Postcode", $q->Postcode);
+        $stmt->bindParam("Email", $q->Email);
+        $stmt->bindParam("Phone", $q->Phone);
+
+        $stmt->execute();
+        $dbh = null;
+    } catch(PDOException $e){
+        echo $e->getMessage();
+}
+
+    echo json_encode($q);
+    echo "Successfully added customer";
+
+}
+
+//TODO Finish the route
+/**
+ * @param $trip_id , JSON in this format (Trip_Booking_No,Trip_Id,Booking_Date,Customer_Id,Num_Concession,Num_Adults)
+ * Deposit amount will be 0 until the staff can confirm the booking by calling back to customer
+ * After the first INSERT of trip booking just initiate another INSERT at customer Booking
+ */
+function bookNewTrip() {
+    //Use slim to get HTTP POST contents
+    $request = \Slim\Slim::getInstance()->request();
+
+    //decode JSON
+    $q = json_decode($request->getBody());
+
+    $sql = "INSERT INTO Trip_Booking SET
+            Trip_Booking_No = :Trip_Booking_No,
+            Trip_Id = :Trip_Id,
+            Booking_Date= :Booking_Date,
+            Deposit_Amount= :Deposit_Amount";
 
 
 
-$app->run();
+//    $sql = "INSERT INTO Customer VALUES (:Customer_Id,:First_Name,:Middle_Initial,:Last_Name,:Street_No,:Street_Name,:Suburb,:Postcode,:Email,:Phone)";
+
+    try {
+        $dbh = getConnection();
+        $stmt = $dbh->prepare($sql);
+
+        //bind parameters to prevent sql injections
+        $stmt->bindParam("Trip_Booking_No", $q->Trip_Booking_No);
+        $stmt->bindParam("Trip_Id", $q->Trip_Id);
+        $stmt->bindParam("Booking_Date", $q->Booking_Date);
+        $stmt->bindParam("Deposit_Amount", $q->Deposit_Amount);
+
+        $stmt->execute();
+
+        $dbh=null;
+
+
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+
+}
+
+function linkCustomer(){
+
+    $request = \Slim\Slim::getInstance()->request();
+
+    //decode JSON
+    $q = json_decode($request->getBody());
+
+    $sql = "INSERT INTO Customer_Booking SET
+            Trip_Booking_No = :Trip_Booking_No,
+            Customer_Id = :Customer_Id,
+            Num_Concessions = :Num_Concessions,
+            Num_Adults = :Num_Adults";
+
+    try {
+
+        $dbh = getConnection();
+        //prepare customer booking
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->bindParam("Trip_Booking_No", $q->Trip_Booking_No);
+        $stmt->bindParam("Customer_Id", $q->Customer_Id);
+        $stmt->bindParam("Num_Concessions", $q->Num_Concessions);
+        $stmt->bindParam("Num_Adults", $q->Num_Adults);
+
+        $stmt->execute();
+
+        $dbh = null;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    echo json_encode($q);
+    echo "Successfully booked trip";
+
+}
+
+
+//PUT Methods
+/**
+ * @param $id
+ * @return Status
+ * GET JSON of customer details and UPDATE them according to their field
+ *
+ */
+function editAccountInfo()
+{
+
+    //Use slim to get HTTP POST contents
+    $request = \Slim\Slim::getInstance()->request();
+
+    //decode JSON
+    $q = json_decode($request->getBody());
+
+    //PDO
+    $sql = "UPDATE Customer SET
+            First_Name=:First_Name,Middle_Initial=:Middle_Initial,Last_Name=:Last_Name,Street_No=:Street_No,Street_Name=:Street_Name,Suburb=:Suburb,Postcode=:Postcode,Email=:Email,Phone=:Phone WHERE Customer_Id=:Customer_Id";
+
+
+    try {
+        $dbh = getConnection();
+        $stmt = $dbh->prepare($sql);
+
+        //bind parameters to prevent sql injections
+        $stmt->bindParam("Customer_Id",$q->Customer_Id);
+        $stmt->bindParam("First_Name", $q->First_Name);
+        $stmt->bindParam("Middle_Initial", $q->Middle_Initial);
+        $stmt->bindParam("Last_Name", $q->Last_Name);
+        $stmt->bindParam("Street_No", $q->Street_No);
+        $stmt->bindParam("Street_Name", $q->Street_Name);
+        $stmt->bindParam("Suburb", $q->Suburb);
+        $stmt->bindParam("Postcode", $q->Postcode);
+        $stmt->bindParam("Email", $q->Email);
+        $stmt->bindParam("Phone", $q->Phone);
+
+
+
+        $stmt->execute();
+        $dbh = null;
+
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    echo json_encode($q);
+    echo "Customer ".$q->Customer_Id." Updated";
+
+
+
+
+}
+
+
+//DELETE Methods
+/**
+ * JSON for (Trip_Booking_No)
+ * @return Status
+ * GET booking_no of a customer then DELETE them from the system
+ */
+function deleteBooking()
+{
+//Use slim to get HTTP POST contents
+    $request = \Slim\Slim::getInstance()->request();
+
+    //decode JSON
+    $q = json_decode($request->getBody());
+
+    //PDO
+    $sql = "DELETE FROM Customer_Booking WHERE Trip_Booking_No = :Trip_Booking_No;DELETE FROM Trip_Booking WHERE Trip_Booking_No = :Trip_Booking_No";
+
+
+    try {
+        $dbh = getConnection();
+        $stmt = $dbh->prepare($sql);
+
+        //bind parameters to prevent sql injections
+        $stmt->bindParam("Trip_Booking_No",$q->Trip_Booking_No);
+
+        $stmt->execute();
+        $dbh = null;
+
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    echo json_encode($q);
+    echo "Booking deleted";
+
+}
+
+
+$app->run(); //end app

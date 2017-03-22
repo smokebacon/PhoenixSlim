@@ -1,11 +1,35 @@
-all cities
-curl -i -X GET http://localhost/sites/ICT33A/cities
+/**GET**/
 
-Return with id=1
-curl -i -X GET http://localhost/sites/ICT33A/cities/1
+//all tours
+curl -i -X GET http://localhost/sites/PhoenixSlim/tour/all
 
-Add like
-curl -i -X PUT -H 'Content-Type: application/json' -d '{"countryid":"1","cityname":"Melbourne"}' http://localhost/sites/ICT33A/cities/like
+//all pending booking for customer id : 01484 (shows only the one with 0 deposit)
+curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
 
-Remove Like
-curl -i -X PUT -H 'Content-Type:application/json' -d '{"countryid":"1","cityname":"Melbourne"}' http://localhost/sites/ICT33A/cities/unlike
+//all booking for customer id : 01484 (shows all their trip)
+curl -i -X GET http://localhost/sites/PhoenixSlim/yourtrip/001484
+
+
+/**POST**/
+
+
+//Add new Customer id:999999
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Customer_id":"999999","First_Name":"Panjapol","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":400,"Street_Name":"Batesford St","Suburb":"NorthRichmond","Postcode":3106,"Email":"Panjapol.chiemsombat@gmail.com","Phone":"0484740282"}' http://localhost/sites/PhoenixSlim/customer/add/
+
+//Add new Booking for a trip id = 167005
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444","Trip_Id":"167005","Booking_Date":"2015-05-01","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
+
+//Then link them with weak entity for the same trip booking no = 444444
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444","Customer_Id":"999999","Num_Concessions":11,"Num_Adults":11}' http://localhost/sites/PhoenixSlim/customer/link/
+
+
+/**PUT**/
+
+
+//Edit customer id:999999
+curl -i -X PUT -H 'Content-Type: application/json' -d '{"Customer_Id":"999999","First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":898,"Street_Name":"Batesford St","Suburb":"Malvern","Postcode":3106,"Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894"}' http://localhost/sites/PhoenixSlim/customer/edit/
+
+
+
+//Delete trip_Booking_no:444444 entry
+curl -i -X DELETE -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444"}' http://localhost/sites/PhoenixSlim/booking/delete
