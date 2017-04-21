@@ -91,7 +91,7 @@ function getLikesForCity($id)
 
         //IMPORTANT to close connection after you have finished with it.
         //There could be hundreds of clients connecting to your site.
-        //If you don't close connections to database this could slow you system
+        //If you don't- close connections to database this could slow you system
         $dbh = null;
 
         //can simple return the record in json format
