@@ -19,6 +19,9 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/yourtrip/001484
 //Add new Customer id:999999
 curl -i -X POST -H 'Content-Type: application/json' -d '{"Customer_id":"999999","First_Name":"Panjapol","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":400,"Street_Name":"Batesford St","Suburb":"NorthRichmond","Postcode":3106,"Email":"Panjapol.chiemsombat@gmail.com","Phone":"0484740282"}' http://localhost/sites/PhoenixSlim/customer/add/
 
+//Add new Customer Review of the trip id 167005, customer_id:999999
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"167005","Customer_Id":"999999","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review
+
 //Add new Booking for a trip id = 167005
 curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444","Trip_Id":"167005","Booking_Date":"2015-05-01","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
 

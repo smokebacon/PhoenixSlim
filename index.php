@@ -45,6 +45,12 @@ $app->get('/yourtrip/:id', 'getAllBooking');
 $app->post('/customer/add/', 'addNewCustomer');
 
 /*--------POST Route------*/
+//Add a new review entry into a trip
+//Accepts JSON as a detail of the review
+//returns status
+$app->post('/customer/review','addNewReview');
+
+/*--------POST Route------*/
 //Book a trip
 //Accepts JSON as Trip Booking details
 $app->post('/customer/book/','bookNewTrip');
@@ -59,6 +65,12 @@ $app->post('/customer/link/','linkCustomer');
 //accepts JSON as a detail of edited account
 //returns a status
 $app->put('/customer/edit/', 'editAccountInfo');
+
+//Change customer password
+//Accepts JSON as old & new password
+//Compare each of them to see if it fits the auth
+//if correct generate new authkey with salt and send it back as a new authkey
+$app->put('/staff/passwordchange','changePassword');
 
 
 /*--------DELETE Route------*/
@@ -290,7 +302,50 @@ function addNewCustomer()
     echo json_encode($q);
     echo "Successfully added customer";
 
+}//End function addNewCustomer()
+
+function addNewReview(){
+
+  //Use slim to get HTTP POST contents
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode JSON
+  $q = json_decode($request->getBody());
+
+  //PDO
+  $sql = "INSERT INTO Customer_Review SET
+                      Trip_Id = :Trip_Id,
+                      Customer_Id = :Customer_Id,
+                      Rating = :Rating,
+                      General_Feedback = :General_Feedback,
+                      Likes = :Likes,
+                      Dislikes = :Dislikes";
+
+
+  try {
+      $dbh = getConnection();
+      $stmt = $dbh->prepare($sql);
+
+      //bind parameters to prevent sql injections
+      $stmt->bindParam("Trip_Id", $q->Trip_Id);
+      $stmt->bindParam("Customer_Id",$q->Customer_Id);
+      $stmt->bindParam("Rating",$q->Rating);
+      $stmt->bindParam("General_Feedback",$q->General_Feedback);
+      $stmt->bindParam("Likes",$q->Likes);
+      $stmt->bindParam("Dislikes",$q->Dislikes);
+
+      $stmt->execute();
+      $dbh = null;
+  } catch(PDOException $e){
+      echo $e->getMessage();
 }
+
+  echo json_encode($q);
+  echo "Successfully added customer";
+
+
+}//End function addNewReview()
+
 
 //TODO Finish the route
 /**
@@ -425,6 +480,12 @@ function editAccountInfo()
 
 
 
+
+}
+
+function changePassword(){
+
+  //TODO finish this function
 
 }
 
