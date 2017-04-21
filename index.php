@@ -149,7 +149,7 @@ function getTour($id)
       $dbh = null;
 
       //return array of objects in JSON
-      echo json_encode($row);
+          echo json_encode($row);
 
 
   } catch (PDOException $e) {
