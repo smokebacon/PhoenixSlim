@@ -23,6 +23,10 @@ EOT;
 //returns JSON
 $app->get('/tour/all', 'getAllTour');
 
+//GET all specific details of the tour and its itinerary
+//returns JSON
+$app-get('/tour/:id','getTour');
+
 //GET all PENDING status booking details -- Logic -- get only trip with 0 amount of deposit associate with the cust_id
 //accept cust_id
 //returns JSON
@@ -122,6 +126,37 @@ function getAllTour()
     }
 
 }
+
+
+function getTour($id)
+{
+  try {
+      //get connection to server
+      $dbh = getConnection();
+
+      //SQL statement
+      $sql = "SELECT * FROM tour WHERE tour_no = :id";
+
+      //Assign value and execute SQL statement
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindParam("id", $id);
+      $stmt->execute();
+
+      //fetch records into array of objects
+      $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+      //close connections
+      $dbh = null;
+
+      //return array of objects in JSON
+          echo json_encode($row);
+
+
+  } catch (PDOException $e) {
+      echo $e - getMessage();
+  }
+}
+
 
 /**
  * @return JSON of trip(s)
