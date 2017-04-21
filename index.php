@@ -25,7 +25,7 @@ $app->get('/tour/all', 'getAllTour');
 
 //GET all specific details of the tour and its itinerary
 //returns JSON
-$app-get('/tour/:id','getTour');
+$app->get('/tour/:id','getTour');
 
 //GET all PENDING status booking details -- Logic -- get only trip with 0 amount of deposit associate with the cust_id
 //accept cust_id
