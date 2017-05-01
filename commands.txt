@@ -6,10 +6,18 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/tour/all
 //a tour (tour no : 021 Twelve apostle drive)
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021
 
-//all pending booking for customer id : 01484 (shows only the one with 0 deposit)
-curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
 
-//all booking for customer id : 01484 (shows all their trip)
+//a tour itinerary
+curl -i -X GET http://localhost/sites/PhoenixSlim/tour/047/itinerary
+
+//TODO modify this route
+//all available trip for the tour : 021
+curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021/open
+
+//all pending Booking for customer id : 01484 (shows only the one with 0 deposit)
+curl -i -X GET http://localhost/sites/PhoenixSlim/Booking/001484
+
+//all Booking for customer id : 01484 (shows all their trip)
 curl -i -X GET http://localhost/sites/PhoenixSlim/yourtrip/001484
 
 
@@ -22,11 +30,10 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"Customer_id":"999999",
 //Add new Customer Review of the trip id 167005, customer_id:999999
 curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"167005","Customer_Id":"999999","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review
 
+//TODO modify this route
 //Add new Booking for a trip id = 167005
-curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444","Trip_Id":"167005","Booking_Date":"2015-05-01","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Booking_No":"444444","Trip_Id":"167005","Booking_Date":"2015-05-01","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
 
-//Then link them with weak entity for the same trip booking no = 444444
-curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444","Customer_Id":"999999","Num_Concessions":11,"Num_Adults":11}' http://localhost/sites/PhoenixSlim/customer/link/
 
 
 /**PUT**/
@@ -37,5 +44,5 @@ curl -i -X PUT -H 'Content-Type: application/json' -d '{"Customer_Id":"999999","
 
 
 
-//Delete trip_Booking_no:444444 entry
-curl -i -X DELETE -H 'Content-Type: application/json' -d '{"Trip_Booking_No":"444444"}' http://localhost/sites/PhoenixSlim/booking/delete
+//Delete Booking_no:444444 entry
+curl -i -X DELETE -H 'Content-Type: application/json' -d '{"Booking_No":"444444"}' http://localhost/sites/PhoenixSlim/Booking/delete

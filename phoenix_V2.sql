@@ -8,7 +8,7 @@ USE Phoenix
 DROP TABLE Customer_Booking;
 DROP TABLE Customer_Review;
 DROP TABLE Customer;
-DROP TABLE Trip_Booking;
+DROP TABLE Booking;
 DROP TABLE Itinerary;
 DROP TABLE Trip;
 DROP TABLE Tour;
@@ -85,19 +85,19 @@ INSERT INTO Itinerary VALUES('004572', 001, '000342', 'Guided tour around the CB
 INSERT INTO Itinerary VALUES('167005', 001, '000599', 'Wine tasting at Pizzini''s', 'Lunch at Pizzini''s');
 
 
-CREATE TABLE Trip_Booking
+CREATE TABLE Booking
 (
-Trip_Booking_No		CHAR(6)	NOT NULL,
+Booking_No		CHAR(6)	NOT NULL,
 Trip_Id				CHAR(6)	NOT NULL,
 Booking_Date		DATE,
 Deposit_Amount		DECIMAL(6,2),
-CONSTRAINT Trip_Booking_pk PRIMARY KEY (Trip_Booking_No),
+CONSTRAINT Booking_pk PRIMARY KEY (Booking_No),
 CONSTRAINT TB_Trip_fk FOREIGN KEY (Trip_Id) REFERENCES Trip (Trip_Id)
 );
 
-INSERT INTO Trip_Booking VALUES('004564', '004572', '2016-08-15', 100);
-INSERT INTO Trip_Booking VALUES('007214', '167005', '2016-05-27', 500);
-INSERT INTO Trip_Booking VALUES('008050', '343271', '2016-11-01', 150);
+INSERT INTO Booking VALUES('004564', '004572', '2016-08-15', 100);
+INSERT INTO Booking VALUES('007214', '167005', '2016-05-27', 500);
+INSERT INTO Booking VALUES('008050', '343271', '2016-11-01', 150);
 
 
 CREATE TABLE Customer
@@ -121,12 +121,12 @@ INSERT INTO Customer VALUES('001484', 'William', 'B', 'Pitt', 200, 'St. Kilda Ro
 
 CREATE TABLE Customer_Booking
 (
-Trip_Booking_No	CHAR(6)	NOT NULL,
+Booking_No	CHAR(6)	NOT NULL,
 Customer_Id		CHAR(6)	NOT NULL,
 Num_Concessions	INTEGER	NOT NULL,
 Num_Adults		INTEGER	NOT NULL,
-CONSTRAINT Customer_Booking_pk PRIMARY KEY (Trip_Booking_No, Customer_Id),
-CONSTRAINT CB_Trip_Booking_fk FOREIGN KEY (Trip_Booking_No) REFERENCES Trip_Booking (Trip_Booking_No),
+CONSTRAINT Customer_Booking_pk PRIMARY KEY (Booking_No, Customer_Id),
+CONSTRAINT CB_Booking_fk FOREIGN KEY (Booking_No) REFERENCES Booking (Booking_No),
 CONSTRAINT CB_Customer_fk FOREIGN KEY (Customer_Id) REFERENCES Customer (Customer_Id)
 );
 
@@ -148,7 +148,7 @@ CONSTRAINT CR_Trip_fk FOREIGN KEY (Trip_Id) REFERENCES Trip (Trip_Id),
 CONSTRAINT CR_Customer_fk FOREIGN KEY (Customer_Id) REFERENCES Customer (Customer_Id)
 );
 
-INSERT INTO Customer_Review VALUES('004572', '031642', 5, 'Excellent trip, I will be booking with you guys again next year!', 'The whole trip was very reasonably priced.', 'None!');
+INSERT INTO Customer_Review VALUES('004572', '031642', 5, 'Excellent trip, I will be Booking with you guys again next year!', 'The whole trip was very reasonably priced.', 'None!');
 INSERT INTO Customer_Review VALUES('167005', '001484', 3, 'It was okay, not as good as Kontiki', 'Staff were nice', 'The food was rubbish');
 INSERT INTO Customer_Review VALUES('343271', '001484', 4, 'Better than the last one', 'Staff were nice like last time and the food was better', 'The tour bus was too noisy');
 

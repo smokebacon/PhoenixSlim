@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfd4331f-f1b8-4423-ba3e-7bebdbe35fd8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Lab4.iml" afterPath="$PROJECT_DIR$/.idea/Lab4.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indexFromICT33A.php" afterPath="$PROJECT_DIR$/indexFromICT33A.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commands.txt" afterPath="$PROJECT_DIR$/commands.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/phoenix_V2.sql" afterPath="$PROJECT_DIR$/phoenix_V2.sql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,6 +23,7 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
     <option name="GROUP_SCHEMA" value="true" />
     <option name="GROUP_CONTENTS" value="false" />
     <option name="SORT_POSITIONED" value="false" />
@@ -39,21 +42,35 @@
           <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2951">
-                  <caret line="210" column="1" lean-forward="true" selection-start-line="210" selection-start-column="1" selection-end-line="210" selection-end-column="1" />
+                <state relative-caret-position="304">
+                  <caret line="496" column="0" lean-forward="true" selection-start-line="496" selection-start-column="0" selection-end-line="496" selection-end-column="0" />
                   <folding>
-                    <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-                    <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-                    <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-                    <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-                    <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-                    <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-                    <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-                    <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-                    <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-                    <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-                    <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+                    <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+                    <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+                    <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+                    <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+                    <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+                    <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+                    <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+                    <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+                    <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+                    <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+                    <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+                    <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+                    <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+                    <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+                    <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="phoenix_V2.sql" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/phoenix_V2.sql">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="383">
+                  <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -65,8 +82,8 @@
           <file leaf-file-name="commands.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/commands.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="384">
-                  <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+                <state relative-caret-position="48">
+                  <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="58" />
                   <folding />
                 </state>
               </provider>
@@ -79,7 +96,17 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Customer</find>
+      <find>trip_booking</find>
+      <find>b</find>
+      <find>boo</find>
+      <find>booki</find>
+      <find>booking</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>booking</replace>
+      <replace>Booking</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,8 +121,10 @@
       <list>
         <option value="$PROJECT_DIR$/public/indexBKUP.php" />
         <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/indexFromICT33A.php" />
+        <option value="$PROJECT_DIR$/phoenix_V2.sql" />
+        <option value="$PROJECT_DIR$/commands.txt" />
+        <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
   </component>
@@ -148,13 +177,13 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1448" />
-    <option name="y" value="-327" />
-    <option name="width" value="1456" />
-    <option name="height" value="886" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -168,22 +197,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PhoenixSlim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PhoenixSlim" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
@@ -191,12 +204,13 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/Dev/Active/Framework/PhoenixLaravel" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="SearchEverywhereHistoryKey" value="cities&#9;null&#9;null" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/scoop/apps/nodejs/7.2.0/nodejs/node" />
     <property name="js-jscs-nodeInterpreter" value="C:\Users\gil_m\scoop\apps\nodejs\7.2.0\nodejs\node.exe" />
     <property name="full.screen.before.presentation.mode" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -235,11 +249,13 @@
       <workItem from="1490193673100" duration="181000" />
       <workItem from="1490193865218" duration="14186000" />
       <workItem from="1492731287849" duration="108000" />
+      <workItem from="1493566382659" duration="4549000" />
+      <workItem from="1493598267323" duration="2847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33980000" />
+    <option name="totallyTimeSpent" value="41376000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -251,30 +267,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1448" y="-327" width="1456" height="886" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10763889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -318,20 +334,88 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3504">
+          <caret line="219" column="9" lean-forward="false" selection-start-line="219" selection-start-column="9" selection-end-line="219" selection-end-column="9" />
+          <folding>
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3360">
+          <caret line="210" column="1" lean-forward="true" selection-start-line="210" selection-start-column="1" selection-end-line="210" selection-end-column="1" />
+          <folding>
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -340,18 +424,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
-          <folding>
-            <marker date="1492731354396" expanded="true" signature="463:629" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="523:622" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="1040:1063" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="2089:2125" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3144:3226" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3184:3225" ph="SELECT Max(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3894:3976" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3934:3975" ph="SELECT Min(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="4614:4703" ph="UPDATE cityl... " />
-            <marker date="1492731354396" expanded="true" signature="5209:5298" ph="UPDATE cityl... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -368,17 +440,21 @@
         <state relative-caret-position="1008">
           <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -387,18 +463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1488">
           <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
-          <folding>
-            <marker date="1492731354396" expanded="true" signature="463:629" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="523:622" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="1040:1063" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="2089:2125" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3144:3226" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3184:3225" ph="SELECT Max(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3894:3976" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3934:3975" ph="SELECT Min(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="4614:4703" ph="UPDATE cityl... " />
-            <marker date="1492731354396" expanded="true" signature="5209:5298" ph="UPDATE cityl... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -415,17 +479,21 @@
         <state relative-caret-position="3312">
           <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -434,18 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1492731354396" expanded="true" signature="463:629" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="523:622" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="1040:1063" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="2089:2125" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3144:3226" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3184:3225" ph="SELECT Max(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3894:3976" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3934:3975" ph="SELECT Min(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="4614:4703" ph="UPDATE cityl... " />
-            <marker date="1492731354396" expanded="true" signature="5209:5298" ph="UPDATE cityl... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -454,17 +510,21 @@
         <state relative-caret-position="3232">
           <caret line="202" column="40" lean-forward="false" selection-start-line="202" selection-start-column="40" selection-end-line="202" selection-end-column="40" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -473,18 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1492731354396" expanded="true" signature="463:629" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="523:622" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="1040:1063" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="2089:2125" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3144:3226" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3184:3225" ph="SELECT Max(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3894:3976" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3934:3975" ph="SELECT Min(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="4614:4703" ph="UPDATE cityl... " />
-            <marker date="1492731354396" expanded="true" signature="5209:5298" ph="UPDATE cityl... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -493,17 +541,21 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -527,17 +579,21 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -561,17 +617,21 @@
         <state relative-caret-position="2805">
           <caret line="165" column="0" lean-forward="false" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -595,17 +655,21 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -629,17 +693,21 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -669,45 +737,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="93" column="23" lean-forward="false" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-          <folding>
-            <marker date="1492731354396" expanded="true" signature="463:629" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="523:622" ph="..." />
-            <marker date="1492731354396" expanded="true" signature="1040:1063" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="2089:2125" ph="SELECT * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3144:3226" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3184:3225" ph="SELECT Max(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3894:3976" ph="Select * fro... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="3934:3975" ph="SELECT Min(l... citylikes" />
-            <marker date="1492731354396" expanded="true" signature="4614:4703" ph="UPDATE cityl... " />
-            <marker date="1492731354396" expanded="true" signature="5209:5298" ph="UPDATE cityl... " />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phoenix_V2.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/commands.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="48">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2951">
-          <caret line="210" column="1" lean-forward="true" selection-start-line="210" selection-start-column="1" selection-end-line="210" selection-end-column="1" />
+        <state relative-caret-position="304">
+          <caret line="496" column="0" lean-forward="true" selection-start-line="496" selection-start-column="0" selection-end-line="496" selection-end-column="0" />
           <folding>
-            <marker date="1490575589505" expanded="true" signature="202:368" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="262:361" ph="..." />
-            <marker date="1490575589505" expanded="true" signature="2365:2383" ph="SELECT * FRO... Tour" />
-            <marker date="1490575589505" expanded="true" signature="3114:3409" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="4175:4429" ph="SELECT c.Tri... Customer_Booking" />
-            <marker date="1490575589505" expanded="true" signature="5189:5568" ph="INSERT INTO Customer... " />
-            <marker date="1490575589505" expanded="true" signature="7108:7301" ph="INSERT INTO Trip_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="8109:8314" ph="INSERT INTO Customer_Booking... " />
-            <marker date="1490575589505" expanded="true" signature="9203:9446" ph="UPDATE Custo... " />
-            <marker date="1490575589505" expanded="true" signature="10660:10729" ph="DELETE FROM " />
-            <marker date="1490575589505" expanded="true" signature="10730:10795" ph="DELETE FROM " />
+            <marker date="1493603284000" expanded="true" signature="218:384" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="278:377" ph="..." />
+            <marker date="1493603284000" expanded="true" signature="3047:3065" ph="SELECT * FRO... Tour" />
+            <marker date="1493603284000" expanded="true" signature="3608:3646" ph="SELECT * FRO... tour" />
+            <marker date="1493603284000" expanded="true" signature="4440:4478" ph="SELECT * FRO... trip" />
+            <marker date="1493603284000" expanded="true" signature="4879:4916" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="4879:4917" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="5334:5377" ph="SELECT * FRO... Itinerary" />
+            <marker date="1493603284000" expanded="true" signature="5975:6053" ph="SELECT * FRO... Booking" />
+            <marker date="1493603284000" expanded="true" signature="6781:7015" ph="SELECT c.Boo... Customer_Booking" />
+            <marker date="1493603284000" expanded="true" signature="7768:8173" ph="INSERT INTO Customer... " />
+            <marker date="1493603284000" expanded="true" signature="9400:9704" ph="INSERT INTO Customer_Review... " />
+            <marker date="1493603284000" expanded="true" signature="10859:11037" ph="INSERT INTO Booking... " />
+            <marker date="1493603284000" expanded="true" signature="12021:12264" ph="UPDATE Custo... " />
+            <marker date="1493603284000" expanded="true" signature="13529:13579" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
