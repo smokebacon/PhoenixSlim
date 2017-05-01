@@ -25,7 +25,7 @@ $app->get('/tour/all', 'getAllTour');
 
 //GET all specific details of the tour and its itinerary
 //returns JSON
-$app->get('/tour/:id','getTour');
+$app->get('/tour/:id/itinerary','getItinerary');
 
 //GET all PENDING status booking details -- Logic -- get only trip with 0 amount of deposit associate with the cust_id
 //accept cust_id
@@ -139,15 +139,14 @@ function getAllTour()
 
 }
 
-
-function getTour($id)
+function getItinerary($id)
 {
   try {
       //get connection to server
       $dbh = getConnection();
 
       //SQL statement
-      $sql = "SELECT * FROM tour WHERE tour_no = :id";
+      $sql = "SELECT * FROM itinerary WHERE tour_no = :id";
 
       //Assign value and execute SQL statement
       $stmt = $dbh->prepare($sql);
@@ -165,7 +164,7 @@ function getTour($id)
 
 
   } catch (PDOException $e) {
-      echo $e - getMessage();
+      echo $e->getMessage();
   }
 }
 
@@ -184,10 +183,9 @@ function getPendingBooking($id)
         $dbh = getConnection();
 
         //SQL statement
-        $sql = "SELECT c.Trip_Booking_No,c.Customer_Id,c.num_concessions,c.num_adults,t.trip_id,t.booking_date,t.Deposit_amount
-                FROM Customer_Booking c JOIN trip_booking t ON c.trip_Booking_No = t.trip_Booking_No
-                WHERE c.Customer_id = :id
-                AND t.deposit_amount = 0";
+        $sql = "SELECT *
+                FROM Booking 
+                WHERE Customer_Id = :id";
 
         //Assign value and execute SQL statement
         $stmt = $dbh->prepare($sql);
@@ -205,7 +203,7 @@ function getPendingBooking($id)
 
 
     } catch (PDOException $e) {
-        echo $e - getMessage();
+        echo $e->getMessage();
     }
 
 }
@@ -244,7 +242,7 @@ function getAllBooking($id)
 
 
     } catch (PDOException $e) {
-        echo $e - getMessage();
+        echo $e->getMessage();
     }
 }
 

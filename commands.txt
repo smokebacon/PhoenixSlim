@@ -3,10 +3,6 @@
 //all tours
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/all
 
-//a tour (tour no : 021 Twelve apostle drive)
-curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021
-
-
 //a tour itinerary
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/047/itinerary
 
@@ -15,7 +11,7 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/tour/047/itinerary
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021/open
 
 //all pending Booking for customer id : 01484 (shows only the one with 0 deposit)
-curl -i -X GET http://localhost/sites/PhoenixSlim/Booking/001484
+curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
 
 //all Booking for customer id : 01484 (shows all their trip)
 curl -i -X GET http://localhost/sites/PhoenixSlim/yourtrip/001484
