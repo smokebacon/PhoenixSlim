@@ -17,69 +17,6 @@ EOT;
     echo $template;
 });
 
-
-/*--------GET Route------*/
-//GET all from tour table
-//returns JSON
-$app->get('/tour/all', 'getAllTour');
-
-//GET all specific details of the tour and its itinerary
-//returns JSON
-$app->get('/tour/:id/itinerary','getItinerary');
-
-//GET all PENDING status booking details -- Logic -- get only trip with 0 amount of deposit associate with the cust_id
-//accept cust_id
-//returns JSON
-$app->get('/booking/:id', 'getPendingBooking');
-
-//GET all trip details with this customer id -- regardless of deposits
-//Accepts cust_id
-//returns JSON
-$app->get('/yourtrip/:id', 'getAllBooking');
-
-
-/*--------POST Route------*/
-//Register a customer into database
-//Accepts JSON as a detail of created account
-//returns status
-$app->post('/customer/add/', 'addNewCustomer');
-
-/*--------POST Route------*/
-//Add a new review entry into a trip
-//Accepts JSON as a detail of the review
-//returns status
-$app->post('/customer/review','addNewReview');
-
-/*--------POST Route------*/
-//Book a trip
-//Accepts JSON as Trip Booking details
-$app->post('/customer/book/','bookNewTrip');
-
-
-//Link a trip to customer
-$app->post('/customer/link/','linkCustomer');
-
-
-/*--------PUT Route------*/
-//Edit Account Info
-//accepts JSON as a detail of edited account
-//returns a status
-$app->put('/customer/edit/', 'editAccountInfo');
-
-//Change customer password
-//Accepts JSON as old & new password
-//Compare each of them to see if it fits the auth
-//if correct generate new authkey with salt and send it back as a new authkey
-$app->put('/staff/passwordchange','changePassword');
-
-
-/*--------DELETE Route------*/
-//Cancel booking
-//Accept trip booking no
-//returns a status
-$app->delete('/booking/delete/', 'deleteBooking');
-
-
 /**
  * @return PDO
  * When called this function returns a reference to a PDO database connection object.
@@ -107,6 +44,9 @@ function getConnection()
 
 //GET Methods
 
+//GET all from tour table
+//returns JSON
+$app->get('/tour/all', 'getAllTour');
 /**
  * @return JSON of tour table
  * Get all tour in the database
@@ -139,6 +79,9 @@ function getAllTour()
 
 }
 
+//GET all specific details of the tour and its itinerary
+//returns JSON
+$app->get('/tour/:id/itinerary','getItinerary');
 function getItinerary($id)
 {
   try {
@@ -168,7 +111,9 @@ function getItinerary($id)
   }
 }
 
-
+//accept cust_id
+//returns JSON
+$app->get('/booking/:id', 'getPendingBooking');
 /**
  * @return JSON of trip(s)
  * @param $id
@@ -208,6 +153,7 @@ function getPendingBooking($id)
 
 }
 
+//TODO Deprecated function
 /**
  * @return JSON of trip(s)
  * @param $id
@@ -246,8 +192,11 @@ function getAllBooking($id)
     }
 }
 
-
 //POST Methods
+//Register a customer into database
+//Accepts JSON as a detail of created account
+//returns status
+$app->post('/customer/add/', 'addNewCustomer');
 /**
  * @return Status
  * Get JSON of customer details and INSERT them into databases
@@ -302,6 +251,10 @@ function addNewCustomer()
 
 }//End function addNewCustomer()
 
+//Add a new review entry into a trip
+//Accepts JSON as a detail of the review
+//returns status
+$app->post('/customer/review','addNewReview');
 function addNewReview(){
 
   //Use slim to get HTTP POST contents
@@ -346,6 +299,9 @@ function addNewReview(){
 
 
 //TODO Finish the route
+//Book a trip
+//Accepts JSON as Trip Booking details
+$app->post('/customer/book/','bookNewTrip');
 /**
  * @param $trip_id , JSON in this format (Trip_Booking_No,Trip_Id,Booking_Date,Customer_Id,Num_Concession,Num_Adults)
  * Deposit amount will be 0 until the staff can confirm the booking by calling back to customer
@@ -390,6 +346,7 @@ function bookNewTrip() {
 
 }
 
+//TODO deprecated
 function linkCustomer(){
 
     $request = \Slim\Slim::getInstance()->request();
@@ -428,6 +385,11 @@ function linkCustomer(){
 
 
 //PUT Methods
+
+//Edit Account Info
+//accepts JSON as a detail of edited account
+//returns a status
+$app->put('/customer/edit/', 'editAccountInfo');
 /**
  * @param $id
  * @return Status
@@ -481,6 +443,11 @@ function editAccountInfo()
 
 }
 
+//Change customer password
+//Accepts JSON as old & new password
+//Compare each of them to see if it fits the auth
+//if correct generate new authkey with salt and send it back as a new authkey
+$app->put('/staff/passwordchange','changePassword');
 function changePassword(){
 
   //TODO finish this function
@@ -489,6 +456,10 @@ function changePassword(){
 
 
 //DELETE Methods
+//Cancel booking
+//Accept trip booking no
+//returns a status
+$app->delete('/booking/delete/', 'deleteBooking');
 /**
  * JSON for (Trip_Booking_No)
  * @return Status

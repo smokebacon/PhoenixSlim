@@ -10,11 +10,10 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/tour/047/itinerary
 //all available trip for the tour : 021
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021/open
 
-//all pending Booking for customer id : 01484 (shows only the one with 0 deposit)
+//all pending Booking for customer id : 01484
 curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
 
-//all Booking for customer id : 01484 (shows all their trip)
-curl -i -X GET http://localhost/sites/PhoenixSlim/yourtrip/001484
+
 
 
 /**POST**/
