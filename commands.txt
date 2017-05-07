@@ -20,7 +20,12 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
 
 
 //Add new Customer id:999999
-curl -i -X POST -H 'Content-Type: application/json' -d '{"Customer_id":"999999","First_Name":"Panjapol","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":400,"Street_Name":"Batesford St","Suburb":"NorthRichmond","Postcode":3106,"Email":"Panjapol.chiemsombat@gmail.com","Phone":"0484740282"}' http://localhost/sites/PhoenixSlim/customer/add/
+curl -X POST \
+  http://localhost/sites/PhoenixSlim/customer/add/ \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 00f6f87f-a709-93ab-0ca7-c36bfe6fb20c' \
+  -d '{"Customer_Id":"999999","First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":"898","Street_Name":"Batesford St","Suburb":"Malvern","Postcode":"3106","Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894","Password":"password"}'
 
 //Add new Customer Review of the trip id 167005, customer_id:999999
 curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"167005","Customer_Id":"999999","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review
@@ -34,9 +39,21 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"Booking_No":"444444","
 /**PUT**/
 
 
-//Edit customer id:999999
-curl -i -X PUT -H 'Content-Type: application/json' -d '{"Customer_Id":"999999","First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":898,"Street_Name":"Batesford St","Suburb":"Malvern","Postcode":3106,"Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894"}' http://localhost/sites/PhoenixSlim/customer/edit/
+//Edit customer details (not providing email/password)
+curl -X PUT \
+  http://localhost/sites/PhoenixSlim/customer/edit/ \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 9d241e82-058c-069e-979e-154f5d13379a' \
+  -d '{"Customer_Id":"999999","First_Name":"BBBBBBB","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":9999,"Street_Name":"Lonsdale st","Suburb":"Melbourne","Postcode":"9999","Phone":"1234567894"}'
 
+//Edit customer password (customer:9999)
+curl -X PUT \
+  http://localhost/sites/PhoenixSlim/customer/changepassword \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 56af7ea6-15c8-6c2e-ec87-53879b531d8b' \
+  -d '{"Customer_Id":"999999","Email":"Panjapol.chiemsombat@gmail.com","Password":"newstuff"}'
 
 
 //Delete Booking_no:444444 entry

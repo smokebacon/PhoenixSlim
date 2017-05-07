@@ -17,6 +17,9 @@ EOT;
     echo $template;
 });
 
+
+
+//COMMON FUNCTION
 /**
  * @return PDO
  * When called this function returns a reference to a PDO database connection object.
@@ -40,6 +43,14 @@ function getConnection()
     }
 
 }//End getConnection()
+
+function generateAuthKey($q){
+
+  $salt = 'SALTISGOOD';
+  $q->Auth = md5($q->Customer_Id.$q->Email.$q->Password.$salt);
+  return $q->Auth;
+
+}
 
 
 //GET Methods
@@ -129,7 +140,7 @@ function getPendingBooking($id)
 
         //SQL statement
         $sql = "SELECT *
-                FROM Booking 
+                FROM Booking
                 WHERE Customer_Id = :id";
 
         //Assign value and execute SQL statement
@@ -153,45 +164,6 @@ function getPendingBooking($id)
 
 }
 
-//TODO Deprecated function
-/**
- * @return JSON of trip(s)
- * @param $id
- * Get all booking of a customer regarding of their pending status
- * Logic : any booking with or without deposits
- */
-function getAllBooking($id)
-{
-
-    try {
-        //get connection to server
-        $dbh = getConnection();
-
-        //SQL statement
-        $sql = "SELECT c.Trip_Booking_No,c.Customer_Id,c.num_concessions,c.num_adults,t.trip_id,t.booking_date,t.Deposit_amount
-                FROM Customer_Booking c JOIN trip_booking t ON c.trip_Booking_No = t.trip_Booking_No
-                WHERE c.Customer_id = :id";
-
-        //Assign value and execute SQL statement
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindParam("id", $id);
-        $stmt->execute();
-
-        //fetch records into array of objects
-        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
-
-        //close connections
-        $dbh = null;
-
-        //return array of objects in JSON
-        echo json_encode($row);
-
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
 //POST Methods
 //Register a customer into database
 //Accepts JSON as a detail of created account
@@ -209,9 +181,11 @@ function addNewCustomer()
     //decode JSON
     $q = json_decode($request->getBody());
 
+    $auth = generateAuthKey($q);
+
     //PDO
     $sql = "INSERT INTO Customer SET
-            Customer_id = :Customer_id,
+            Customer_Id = :Customer_Id,
             First_Name = :First_Name,
             Middle_Initial = :Middle_Initial,
             Last_Name = :Last_Name,
@@ -220,25 +194,26 @@ function addNewCustomer()
             Suburb = :Suburb,
             Postcode = :Postcode,
             Email = :Email,
-            Phone = :Phone";
-
-//    $sql = "INSERT INTO Customer VALUES (:Customer_Id,:First_Name,:Middle_Initial,:Last_Name,:Street_No,:Street_Name,:Suburb,:Postcode,:Email,:Phone)";
+            Phone = :Phone,
+            Auth = :Auth";
 
     try {
         $dbh = getConnection();
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam("Customer_id", $q->Customer_id);
-        $stmt->bindParam("First_Name", $q->First_Name);
-        $stmt->bindParam("Middle_Initial", $q->Middle_Initial);
-        $stmt->bindParam("Last_Name", $q->Last_Name);
-        $stmt->bindParam("Street_No", $q->Street_No);
-        $stmt->bindParam("Street_Name", $q->Street_Name);
-        $stmt->bindParam("Suburb", $q->Suburb);
-        $stmt->bindParam("Postcode", $q->Postcode);
-        $stmt->bindParam("Email", $q->Email);
-        $stmt->bindParam("Phone", $q->Phone);
+
+        $stmt->bindParam('Customer_Id', $q->Customer_Id);
+        $stmt->bindParam('First_Name', $q->First_Name);
+        $stmt->bindParam('Middle_Initial', $q->Middle_Initial);
+        $stmt->bindParam('Last_Name', $q->Last_Name);
+        $stmt->bindParam('Street_No', $q->Street_No);
+        $stmt->bindParam('Street_Name', $q->Street_Name);
+        $stmt->bindParam('Suburb', $q->Suburb);
+        $stmt->bindParam('Postcode', $q->Postcode);
+        $stmt->bindParam('Email', $q->Email);
+        $stmt->bindParam('Phone', $q->Phone);
+        $stmt->bindParam('Auth', $q->Auth);
 
         $stmt->execute();
         $dbh = null;
@@ -247,9 +222,10 @@ function addNewCustomer()
 }
 
     echo json_encode($q);
-    echo "Successfully added customer";
+    echo 'Successfully added customer';
 
 }//End function addNewCustomer()
+
 
 //Add a new review entry into a trip
 //Accepts JSON as a detail of the review
@@ -292,21 +268,16 @@ function addNewReview(){
 }
 
   echo json_encode($q);
-  echo "Successfully added customer";
+  echo "Successfully added review";
 
 
 }//End function addNewReview()
 
 
-//TODO Finish the route
+//TODO Finish the function later
 //Book a trip
 //Accepts JSON as Trip Booking details
 $app->post('/customer/book/','bookNewTrip');
-/**
- * @param $trip_id , JSON in this format (Trip_Booking_No,Trip_Id,Booking_Date,Customer_Id,Num_Concession,Num_Adults)
- * Deposit amount will be 0 until the staff can confirm the booking by calling back to customer
- * After the first INSERT of trip booking just initiate another INSERT at customer Booking
- */
 function bookNewTrip() {
     //Use slim to get HTTP POST contents
     $request = \Slim\Slim::getInstance()->request();
@@ -346,43 +317,6 @@ function bookNewTrip() {
 
 }
 
-//TODO deprecated
-function linkCustomer(){
-
-    $request = \Slim\Slim::getInstance()->request();
-
-    //decode JSON
-    $q = json_decode($request->getBody());
-
-    $sql = "INSERT INTO Customer_Booking SET
-            Trip_Booking_No = :Trip_Booking_No,
-            Customer_Id = :Customer_Id,
-            Num_Concessions = :Num_Concessions,
-            Num_Adults = :Num_Adults";
-
-    try {
-
-        $dbh = getConnection();
-        //prepare customer booking
-        $stmt = $dbh->prepare($sql);
-
-        $stmt->bindParam("Trip_Booking_No", $q->Trip_Booking_No);
-        $stmt->bindParam("Customer_Id", $q->Customer_Id);
-        $stmt->bindParam("Num_Concessions", $q->Num_Concessions);
-        $stmt->bindParam("Num_Adults", $q->Num_Adults);
-
-        $stmt->execute();
-
-        $dbh = null;
-    }catch(PDOException $e){
-        echo $e->getMessage();
-    }
-
-    echo json_encode($q);
-    echo "Successfully booked trip";
-
-}
-
 
 //PUT Methods
 
@@ -407,7 +341,7 @@ function editAccountInfo()
 
     //PDO
     $sql = "UPDATE Customer SET
-            First_Name=:First_Name,Middle_Initial=:Middle_Initial,Last_Name=:Last_Name,Street_No=:Street_No,Street_Name=:Street_Name,Suburb=:Suburb,Postcode=:Postcode,Email=:Email,Phone=:Phone WHERE Customer_Id=:Customer_Id";
+            First_Name=:First_Name,Middle_Initial=:Middle_Initial,Last_Name=:Last_Name,Street_No=:Street_No,Street_Name=:Street_Name,Suburb=:Suburb,Postcode=:Postcode,Phone=:Phone WHERE Customer_Id=:Customer_Id";
 
 
     try {
@@ -415,18 +349,15 @@ function editAccountInfo()
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam("Customer_Id",$q->Customer_Id);
-        $stmt->bindParam("First_Name", $q->First_Name);
-        $stmt->bindParam("Middle_Initial", $q->Middle_Initial);
-        $stmt->bindParam("Last_Name", $q->Last_Name);
-        $stmt->bindParam("Street_No", $q->Street_No);
-        $stmt->bindParam("Street_Name", $q->Street_Name);
-        $stmt->bindParam("Suburb", $q->Suburb);
-        $stmt->bindParam("Postcode", $q->Postcode);
-        $stmt->bindParam("Email", $q->Email);
-        $stmt->bindParam("Phone", $q->Phone);
-
-
+        $stmt->bindParam('Customer_Id',$q->Customer_Id);
+        $stmt->bindParam('First_Name', $q->First_Name);
+        $stmt->bindParam('Middle_Initial', $q->Middle_Initial);
+        $stmt->bindParam('Last_Name', $q->Last_Name);
+        $stmt->bindParam('Street_No', $q->Street_No);
+        $stmt->bindParam('Street_Name', $q->Street_Name);
+        $stmt->bindParam('Suburb', $q->Suburb);
+        $stmt->bindParam('Postcode', $q->Postcode);
+        $stmt->bindParam('Phone', $q->Phone);
 
         $stmt->execute();
         $dbh = null;
@@ -447,10 +378,43 @@ function editAccountInfo()
 //Accepts JSON as old & new password
 //Compare each of them to see if it fits the auth
 //if correct generate new authkey with salt and send it back as a new authkey
-$app->put('/staff/passwordchange','changePassword');
+$app->put('/customer/changepassword','changePassword');
 function changePassword(){
 
-  //TODO finish this function
+  //generate auth = 'Customer_Id','Email','Password_new'
+  //update auth
+
+  //Use slim to get HTTP POST contents
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode JSON
+  $q = json_decode($request->getBody());
+
+  $newAuth = generateAuthKey($q);
+
+  //PDO
+  $sql = "UPDATE Customer SET
+          Auth = :Auth
+          WHERE Customer_Id = :Customer_Id";
+
+  try {
+      $dbh = getConnection();
+      $stmt = $dbh->prepare($sql);
+
+      //bind parameters to prevent sql injections
+      $stmt->bindParam('Customer_Id',$q->Customer_Id);
+      $stmt->bindParam('Auth',$newAuth);
+
+      $stmt->execute();
+      $dbh = null;
+
+  } catch(PDOException $e){
+      echo $e->getMessage();
+  }
+
+  echo json_encode($q);
+  echo "new auth ".$q->Customer_Id." Updated";
+
 
 }
 
