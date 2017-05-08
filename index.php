@@ -43,13 +43,57 @@ function getConnection()
     }
 
 }//End getConnection()
+$app->post('/customer/getAuth','getAuth');
+function getAuth()
+{
+    $request = \Slim\Slim::getInstance()->request();
 
-function generateAuthKey($q){
+    //decode JSON
+    $q = json_decode($request->getBody());
 
-  $salt = 'SALTISGOOD';
-  $q->Auth = md5($q->Customer_Id.$q->Email.$q->Password.$salt);
-  return $q->Auth;
+    $q->Auth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
 
+    echo '{"Auth":"'.$q->Auth.'"}';
+
+}
+
+
+function generateAuthKey($Customer_Id,$Email,$Password){
+
+  $auth= md5($Customer_Id.$Email.$Password);
+  return $auth;
+
+}
+
+//GET Single customer data from table
+$app->get('/customer/:id','getCustomer');
+function getCustomer($id)
+{
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT * FROM Customer WHERE Customer_Id = :id";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return array of objects in JSON
+        echo json_encode($row);
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 }
 
 
@@ -181,7 +225,9 @@ function addNewCustomer()
     //decode JSON
     $q = json_decode($request->getBody());
 
-    $auth = generateAuthKey($q);
+    $q->Auth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
+
+    $q->Enabled=0;
 
     //PDO
     $sql = "INSERT INTO Customer SET
@@ -195,7 +241,8 @@ function addNewCustomer()
             Postcode = :Postcode,
             Email = :Email,
             Phone = :Phone,
-            Auth = :Auth";
+            Auth = :Auth,
+            Enabled =:Enabled;";
 
     try {
         $dbh = getConnection();
@@ -214,15 +261,18 @@ function addNewCustomer()
         $stmt->bindParam('Email', $q->Email);
         $stmt->bindParam('Phone', $q->Phone);
         $stmt->bindParam('Auth', $q->Auth);
+        $stmt->bindParam('Enabled',$q->Enabled);
 
         $stmt->execute();
         $dbh = null;
+
+        echo '{"Auth":"'.$q->Auth.'"}';
+
     } catch(PDOException $e){
         echo $e->getMessage();
 }
 
-    echo json_encode($q);
-    echo 'Successfully added customer';
+
 
 }//End function addNewCustomer()
 
@@ -323,7 +373,7 @@ function bookNewTrip() {
 //Edit Account Info
 //accepts JSON as a detail of edited account
 //returns a status
-$app->put('/customer/edit/', 'editAccountInfo');
+$app->post('/customer/edit/', 'editAccountInfo');
 /**
  * @param $id
  * @return Status
@@ -367,8 +417,6 @@ function editAccountInfo()
     }
 
     echo json_encode($q);
-    echo "Customer ".$q->Customer_Id." Updated";
-
 
 
 
@@ -378,7 +426,7 @@ function editAccountInfo()
 //Accepts JSON as old & new password
 //Compare each of them to see if it fits the auth
 //if correct generate new authkey with salt and send it back as a new authkey
-$app->put('/customer/changepassword','changePassword');
+$app->post('/customer/changepassword','changePassword');
 function changePassword(){
 
   //generate auth = 'Customer_Id','Email','Password_new'
@@ -390,7 +438,9 @@ function changePassword(){
   //decode JSON
   $q = json_decode($request->getBody());
 
-  $newAuth = generateAuthKey($q);
+  $newAuth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
+
+  $q->Auth = $newAuth;
 
   //PDO
   $sql = "UPDATE Customer SET
@@ -413,7 +463,7 @@ function changePassword(){
   }
 
   echo json_encode($q);
-  echo "new auth ".$q->Customer_Id." Updated";
+//  echo "new auth ".$q->Customer_Id." Updated";
 
 
 }
