@@ -22,7 +22,7 @@ curl -X POST \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: 00f6f87f-a709-93ab-0ca7-c36bfe6fb20c' \
-  -d '{"First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":"898","Street_Name":"Batesford St","Suburb":"Malvern","Postcode":"3106","Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894","Password":"password","Enabled":"0"}'
+  -d '{"First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":"898","Street_Name":"Batesford St","Suburb":"Malvern","Postcode":"3106","Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894","Password":"password"}'
 
 //Add new Customer Review of the trip id 167005, customer_id:3
 curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"021003","Customer_Id":"4","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review

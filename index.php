@@ -62,19 +62,19 @@ function generateAuthKey($Email,$Password){
 }
 
 //GET Single customer data from table
-$app->get('/customer/:id','getCustomer');
-function getCustomer($id)
+$app->get('/customer/:Auth','getCustomer');
+function getCustomer($Auth)
 {
     try {
         //get connection to server
         $dbh = getConnection();
 
         //SQL statement
-        $sql = "SELECT * FROM Customer WHERE Customer_Id = :id";
+        $sql = "SELECT * FROM Customer WHERE Auth =:Auth";
 
         //Assign value and execute SQL statement
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam("id", $id);
+        $stmt->bindParam("Auth",$Auth);
         $stmt->execute();
 
         //fetch records into array of objects
@@ -85,6 +85,7 @@ function getCustomer($id)
 
         //return array of objects in JSON
         echo json_encode($row);
+        // echo '{"Email":"'.$row->Email.'"}';
 
 
     } catch (PDOException $e) {
@@ -245,9 +246,6 @@ function addNewCustomer()
 
     $q->Auth = generateAuthKey($q->Email,$q->Password);
 
-    $q->Enabled=0;
-
-    //PDO
     $sql = "INSERT INTO Customer SET
             First_Name = :First_Name,
             Middle_Initial = :Middle_Initial,
@@ -259,7 +257,7 @@ function addNewCustomer()
             Email = :Email,
             Phone = :Phone,
             Auth = :Auth,
-            Enabled =:Enabled;";
+            Enabled=0;";
 
     try {
         $dbh = getConnection();
@@ -277,7 +275,6 @@ function addNewCustomer()
         $stmt->bindParam('Email', $q->Email);
         $stmt->bindParam('Phone', $q->Phone);
         $stmt->bindParam('Auth', $q->Auth);
-        $stmt->bindParam('Enabled',$q->Enabled);
 
         $stmt->execute();
         $dbh = null;
@@ -393,14 +390,14 @@ function bookNewTrip() {
 //Edit Account Info
 //accepts JSON as a detail of edited account
 //returns a status
-$app->post('/customer/edit/', 'editAccountInfo');
+$app->post('/customer/edit/:Email', 'editAccountInfo');
 /**
  * @param $id
  * @return Status
  * GET JSON of customer details and UPDATE them according to their field
  *
  */
-function editAccountInfo()
+function editAccountInfo($Email)
 {
 
     //Use slim to get HTTP POST contents
@@ -410,8 +407,8 @@ function editAccountInfo()
     $q = json_decode($request->getBody());
 
     //PDO
-    $sql = "UPDATE Customer SET
-            First_Name=:First_Name,Middle_Initial=:Middle_Initial,Last_Name=:Last_Name,Street_No=:Street_No,Street_Name=:Street_Name,Suburb=:Suburb,Postcode=:Postcode,Phone=:Phone WHERE Customer_Id=:Customer_Id";
+    $sql = "UPDATE customer SET
+            First_Name=:First_Name,Middle_Initial=:Middle_Initial,Last_Name=:Last_Name,Street_No=:Street_No,Street_Name=:Street_Name,Suburb=:Suburb,Postcode=:Postcode,Phone=:Phone WHERE Email=:Email";
 
 
     try {
@@ -419,7 +416,7 @@ function editAccountInfo()
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam('Customer_Id',$q->Customer_Id);
+        $stmt->bindParam('Email',$Email);
         $stmt->bindParam('First_Name', $q->First_Name);
         $stmt->bindParam('Middle_Initial', $q->Middle_Initial);
         $stmt->bindParam('Last_Name', $q->Last_Name);
@@ -435,11 +432,7 @@ function editAccountInfo()
     } catch(PDOException $e){
         echo $e->getMessage();
     }
-
     echo json_encode($q);
-
-
-
 }
 
 //Change customer password
@@ -465,14 +458,14 @@ function changePassword(){
   //PDO
   $sql = "UPDATE Customer SET
           Auth = :Auth
-          WHERE Customer_Id = :Customer_Id";
+          WHERE Email = :Email";
 
   try {
       $dbh = getConnection();
       $stmt = $dbh->prepare($sql);
 
       //bind parameters to prevent sql injections
-      $stmt->bindParam('Customer_Id',$q->Customer_Id);
+      $stmt->bindParam('Email',$q->Email);
       $stmt->bindParam('Auth',$newAuth);
 
       $stmt->execute();
