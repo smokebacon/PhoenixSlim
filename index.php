@@ -17,8 +17,6 @@ EOT;
     echo $template;
 });
 
-
-
 //COMMON FUNCTION
 /**
  * @return PDO
@@ -51,16 +49,14 @@ function getAuth()
     //decode JSON
     $q = json_decode($request->getBody());
 
-    $q->Auth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
+    $q->Auth = generateAuthKey($q->Email,$q->Password);
 
     echo '{"Auth":"'.$q->Auth.'"}';
-
 }
 
+function generateAuthKey($Email,$Password){
 
-function generateAuthKey($Customer_Id,$Email,$Password){
-
-  $auth= md5($Customer_Id.$Email.$Password);
+  $auth= md5($Email.$Password);
   return $auth;
 
 }
@@ -95,7 +91,6 @@ function getCustomer($id)
         echo $e->getMessage();
     }
 }
-
 
 //GET Methods
 
@@ -134,11 +129,34 @@ function getAllTour()
 
 }
 
+//GET all available trip of a tour
+//returns JSON
+$app->get('/tour/open/:id','getAvailableTrip');
+function getAvailableTrip($id){
+    try{
+        $dbh = getConnection();
+
+        $sql = "SELECT * , (SELECT SUM(Max_Passengers - (SELECT SUM(Num_Adults + Num_Concessions) FROM Booking WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id))))'Seats Remaining'
+FROM trip WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id) AND Max_Passengers > (SELECT SUM(Num_Concessions + Num_Adults) FROM Booking WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id))";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("id",$id);
+        $stmt->execute();
+
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        $dbh = null;
+
+        echo json_encode($row);
+    }catch (PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 //GET all specific details of the tour and its itinerary
 //returns JSON
 $app->get('/tour/:id/itinerary','getItinerary');
-function getItinerary($id)
-{
+function getItinerary($id){
   try {
       //get connection to server
       $dbh = getConnection();
@@ -225,13 +243,12 @@ function addNewCustomer()
     //decode JSON
     $q = json_decode($request->getBody());
 
-    $q->Auth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
+    $q->Auth = generateAuthKey($q->Email,$q->Password);
 
     $q->Enabled=0;
 
     //PDO
     $sql = "INSERT INTO Customer SET
-            Customer_Id = :Customer_Id,
             First_Name = :First_Name,
             Middle_Initial = :Middle_Initial,
             Last_Name = :Last_Name,
@@ -250,7 +267,6 @@ function addNewCustomer()
 
         //bind parameters to prevent sql injections
 
-        $stmt->bindParam('Customer_Id', $q->Customer_Id);
         $stmt->bindParam('First_Name', $q->First_Name);
         $stmt->bindParam('Middle_Initial', $q->Middle_Initial);
         $stmt->bindParam('Last_Name', $q->Last_Name);
@@ -335,29 +351,33 @@ function bookNewTrip() {
     //decode JSON
     $q = json_decode($request->getBody());
 
-    $sql = "INSERT INTO Trip_Booking SET
-            Trip_Booking_No = :Trip_Booking_No,
+    $sql = "INSERT INTO Booking SET
+            Customer_Id = :Customer_Id,
             Trip_Id = :Trip_Id,
             Booking_Date= :Booking_Date,
+            Num_Concessions = :Num_Concessions,
+            Num_Adults = :Num_Adults,
             Deposit_Amount= :Deposit_Amount";
 
-
-
-//    $sql = "INSERT INTO Customer VALUES (:Customer_Id,:First_Name,:Middle_Initial,:Last_Name,:Street_No,:Street_Name,:Suburb,:Postcode,:Email,:Phone)";
 
     try {
         $dbh = getConnection();
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam("Trip_Booking_No", $q->Trip_Booking_No);
+        $stmt->bindParam("Customer_Id",$q->Customer_Id);
         $stmt->bindParam("Trip_Id", $q->Trip_Id);
         $stmt->bindParam("Booking_Date", $q->Booking_Date);
+        $stmt->bindParam("Num_Concessions",$q->Num_Concessions);
+        $stmt->bindParam("Num_Adults",$q->Num_Adults);
         $stmt->bindParam("Deposit_Amount", $q->Deposit_Amount);
 
         $stmt->execute();
 
         $dbh=null;
+
+        echo json_encode($q);
+        echo "Successfully booked!";
 
 
     } catch(PDOException $e){
@@ -438,7 +458,7 @@ function changePassword(){
   //decode JSON
   $q = json_decode($request->getBody());
 
-  $newAuth = generateAuthKey($q->Customer_Id,$q->Email,$q->Password);
+  $newAuth = generateAuthKey($q->Email,$q->Password);
 
   $q->Auth = $newAuth;
 
@@ -464,8 +484,6 @@ function changePassword(){
 
   echo json_encode($q);
 //  echo "new auth ".$q->Customer_Id." Updated";
-
-
 }
 
 
@@ -488,7 +506,7 @@ function deleteBooking()
     $q = json_decode($request->getBody());
 
     //PDO
-    $sql = "DELETE FROM Customer_Booking WHERE Trip_Booking_No = :Trip_Booking_No;DELETE FROM Trip_Booking WHERE Trip_Booking_No = :Trip_Booking_No";
+    $sql = "DELETE FROM Booking WHERE Booking_No = :Booking_No";
 
 
     try {
@@ -496,7 +514,7 @@ function deleteBooking()
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam("Trip_Booking_No",$q->Trip_Booking_No);
+        $stmt->bindParam("Booking_No",$q->Booking_No);
 
         $stmt->execute();
         $dbh = null;

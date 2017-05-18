@@ -6,18 +6,15 @@ curl -i -X GET http://localhost/sites/PhoenixSlim/tour/all
 //a tour itinerary
 curl -i -X GET http://localhost/sites/PhoenixSlim/tour/047/itinerary
 
-//TODO modify this route
 //all available trip for the tour : 021
-curl -i -X GET http://localhost/sites/PhoenixSlim/tour/021/open
+curl -i -X GET http://localhost/sites/PhoenixSlim/tour/open/021
 
-//all pending Booking for customer id : 01484
-curl -i -X GET http://localhost/sites/PhoenixSlim/booking/001484
-
+//all pending Booking for customer id : 1
+curl -i -X GET http://localhost/sites/PhoenixSlim/booking/1
 
 
 
 /**POST**/
-
 
 //Add new Customer id:999999
 curl -X POST \
@@ -25,36 +22,40 @@ curl -X POST \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: 00f6f87f-a709-93ab-0ca7-c36bfe6fb20c' \
-  -d '{"Customer_Id":"999999","First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":"898","Street_Name":"Batesford St","Suburb":"Malvern","Postcode":"3106","Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894","Password":"password}'
+  -d '{"First_Name":"Panjapol","Middle_Initial":"F","Last_Name":"Chiemsombat","Street_No":"898","Street_Name":"Batesford St","Suburb":"Malvern","Postcode":"3106","Email":"Panjapol.chiemsombat@gmail.com","Phone":"1234567894","Password":"password","Enabled":"0"}'
 
-//Add new Customer Review of the trip id 167005, customer_id:999999
-curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"167005","Customer_Id":"999999","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review
+//Add new Customer Review of the trip id 167005, customer_id:3
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Trip_Id":"021003","Customer_Id":"4","Rating":"5","General_Feedback":"Great service-Terrible traffic","Likes":"Food and beverages","Dislikes":"Traffic"}' http://localhost/sites/PhoenixSlim/customer/review
 
-//TODO modify this route
-//Add new Booking for a trip id = 167005
-curl -i -X POST -H 'Content-Type: application/json' -d '{"Booking_No":"444444","Trip_Id":"167005","Booking_Date":"2015-05-01","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
+
+//Add new Booking for a trip id = 055001
+curl -i -X POST -H 'Content-Type: application/json' -d '{"Customer_Id":"3","Trip_Id":"055001","Booking_Date":"2015-05-01","Num_Concessions":"5","Num_Adults":"1","Deposit_Amount":"0.00"}' http://localhost/sites/PhoenixSlim/customer/book/
 
 
 
 /**PUT**/
 
-
 //Edit customer details (not providing email/password)
-curl -X PUT \
+curl -X POST \
   http://localhost/sites/PhoenixSlim/customer/edit/ \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
-  -H 'postman-token: 9d241e82-058c-069e-979e-154f5d13379a' \
-  -d '{"Customer_Id":"999999","First_Name":"BBBBBBB","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":9999,"Street_Name":"Lonsdale st","Suburb":"Melbourne","Postcode":"9999","Phone":"1234567894"}'
+  -H 'postman-token: a2726cf3-f734-f5cd-ec28-431fb0a31437' \
+  -d '{"Customer_Id":"4","First_Name":"BBBBBBB","Middle_Initial":"G","Last_Name":"Chiemsombat","Street_No":"9999","Street_Name":"Lonsdale st","Suburb":"Melbourne","Postcode":"9999","Phone":"1234567894"}'
 
 //Edit customer password (customer:9999)
-curl -X PUT \
+curl -X POST \
   http://localhost/sites/PhoenixSlim/customer/changepassword \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: 56af7ea6-15c8-6c2e-ec87-53879b531d8b' \
-  -d '{"Customer_Id":"999999","Email":"Panjapol.chiemsombat@gmail.com","Password":"newstuff"}'
+  -d '{"Customer_Id":"4","Email":"Panjapol.chiemsombat@gmail.com","Password":"newstuff"}'
 
 
-//Delete Booking_no:444444 entry
-curl -i -X DELETE -H 'Content-Type: application/json' -d '{"Booking_No":"444444"}' http://localhost/sites/PhoenixSlim/Booking/delete
+//Delete Booking_no:107 entry
+curl -X DELETE \
+  http://localhost/sites/PhoenixSlim/booking/delete \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 7e9c7b4c-8c79-fd1b-be2b-c28d64f372f7' \
+  -d '{"Booking_No":"107"}'
