@@ -41,6 +41,68 @@ function getConnection()
     }
 
 }//End getConnection()
+
+function getCustomerId($Auth)
+{
+
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT * FROM Customer WHERE Auth =:Auth";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("Auth",$Auth);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return customer id
+        return $row->Customer_Id;
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function getIdFromAuth($auth){
+
+  try {
+      //get connection to server
+      $dbh = getConnection();
+
+      //SQL statement
+      $sql = "SELECT * FROM Customer WHERE Auth =:Auth";
+
+      //Assign value and execute SQL statement
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindParam("Auth",$auth);
+      $stmt->execute();
+
+      //fetch records into array of objects
+      $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+      //close connections
+      $dbh = null;
+
+      //return array of objects in JSON
+      return $row->Customer_Id;
+      // echo '{"Email":"'.$row->Email.'"}';
+
+
+    }catch(PDOException $e){
+      echo $e->getMessage();
+  }
+}
+
+
 $app->post('/customer/getAuth','getAuth');
 function getAuth()
 {
@@ -65,6 +127,7 @@ function generateAuthKey($Email,$Password){
 $app->get('/customer/:Auth','getCustomer');
 function getCustomer($Auth)
 {
+
     try {
         //get connection to server
         $dbh = getConnection();
@@ -78,13 +141,15 @@ function getCustomer($Auth)
         $stmt->execute();
 
         //fetch records into array of objects
-        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
 
         //close connections
         $dbh = null;
 
         //return array of objects in JSON
         echo json_encode($row);
+
+        return $row->Customer_Id;
         // echo '{"Email":"'.$row->Email.'"}';
 
 
@@ -219,6 +284,56 @@ function getPendingBooking($id)
 
         //return array of objects in JSON
             echo json_encode($row);
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+}
+
+//accept auth
+//returns JSON
+$app->get('/booking/getbookingfromauth/', 'getBookingFromAuth');
+/**
+ * @return JSON of trip(s)
+ * @param $id
+ * Get all pending booking of a customer
+ * logic : any booking with 0 amount of deposit is considered pending booking
+ */
+function getBookingFromAuth()
+{
+
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode haeder
+  $Auth = $request->headers->get('Auth');
+
+  //pass header value into customer method and have it returned a customer Id
+  $id = getCustomerId($Auth);
+
+    try {
+        //get connection to server
+        $dbh = getConnection();
+
+        //SQL statement
+        $sql = "SELECT *
+                FROM Booking
+                WHERE Customer_Id = :id";
+
+        //Assign value and execute SQL statement
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+
+        //fetch records into array of objects
+        $row = $stmt->fetchALL(PDO::FETCH_OBJ);
+
+        //close connections
+        $dbh = null;
+
+        //return array of objects in JSON
+        echo json_encode($row);
 
 
     } catch (PDOException $e) {
