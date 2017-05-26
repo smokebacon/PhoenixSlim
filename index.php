@@ -221,7 +221,7 @@ FROM trip WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id) AND Ma
 
 //GET all specific details of the tour and its itinerary
 //returns JSON
-$app->get('/tour/:id/itinerary','getItinerary');
+$app->get('/tour/:id/itinerary/','getItinerary');
 function getItinerary($id){
   try {
       //get connection to server
@@ -317,9 +317,12 @@ function getBookingFromAuth()
         $dbh = getConnection();
 
         //SQL statement
-        $sql = "SELECT *
-                FROM Booking
-                WHERE Customer_Id = :id";
+        $sql = "SELECT booking.*,tour.Tour_No,tour.Tour_Name,trip.Departure_Date,
+                ((booking.Num_Adults*trip.Standard_Amount) + (booking.Num_Concessions*trip.Concession_Amount)) AS Amount_Due
+                FROM booking join trip join tour
+                WHERE booking.Customer_Id = 1
+                AND booking.Trip_id = trip.Trip_id
+                AND trip.Tour_No = tour.Tour_No;";
 
         //Assign value and execute SQL statement
         $stmt = $dbh->prepare($sql);
@@ -408,7 +411,7 @@ function addNewCustomer()
 //Add a new review entry into a trip
 //Accepts JSON as a detail of the review
 //returns status
-$app->post('/customer/review','addNewReview');
+$app->post('/customer/review/','addNewReview');
 function addNewReview(){
 
   //Use slim to get HTTP POST contents
