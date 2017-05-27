@@ -202,8 +202,9 @@ function getAvailableTrip($id){
     try{
         $dbh = getConnection();
 
-        $sql = "SELECT * , (SELECT SUM(Max_Passengers - (SELECT SUM(Num_Adults + Num_Concessions) FROM Booking WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id))))'Seats Remaining'
-FROM trip WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id) AND Max_Passengers > (SELECT SUM(Num_Concessions + Num_Adults) FROM Booking WHERE Trip_Id IN (SELECT Trip_Id FROM trip WHERE Tour_No = :id))";
+        $sql = "SELECT trip.* , Sum(booking.Num_Adults + booking.Num_Concessions) as 'Seats_Taken'
+FROM trip join booking join tour WHERE trip.Trip_Id AND Booking.trip_Id = trip.trip_id AND tour.Tour_No = trip.tour_No
+And tour.Tour_No = :id group by trip.Trip_Id;";
 
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam("id",$id);
@@ -228,7 +229,8 @@ function getItinerary($id){
       $dbh = getConnection();
 
       //SQL statement
-      $sql = "SELECT * FROM itinerary WHERE tour_no = :id";
+      $sql = "SELECT Itinerary.*,Tour.* FROM itinerary join Tour WHERE itinerary.tour_no = :id AND Tour.Tour_No = Itinerary.Tour_No";
+
 
       //Assign value and execute SQL statement
       $stmt = $dbh->prepare($sql);
@@ -292,6 +294,8 @@ function getPendingBooking($id)
 
 }
 
+
+
 //accept auth
 //returns JSON
 $app->get('/booking/getbookingfromauth/', 'getBookingFromAuth');
@@ -306,7 +310,7 @@ function getBookingFromAuth()
 
   $request = \Slim\Slim::getInstance()->request();
 
-  //decode haeder
+  //decode header
   $Auth = $request->headers->get('Auth');
 
   //pass header value into customer method and have it returned a customer Id
@@ -320,7 +324,7 @@ function getBookingFromAuth()
         $sql = "SELECT booking.*,tour.Tour_No,tour.Tour_Name,trip.Departure_Date,
                 ((booking.Num_Adults*trip.Standard_Amount) + (booking.Num_Concessions*trip.Concession_Amount)) AS Amount_Due
                 FROM booking join trip join tour
-                WHERE booking.Customer_Id = 1
+                WHERE booking.Customer_Id = :id
                 AND booking.Trip_id = trip.Trip_id
                 AND trip.Tour_No = tour.Tour_No;";
 
