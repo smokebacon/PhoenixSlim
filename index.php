@@ -162,7 +162,7 @@ function getCustomer($Auth)
 
 //GET all from tour table
 //returns JSON
-$app->get('/tour/all', 'getAllTour');
+$app->get('/tour/all/', 'getAllTour');
 /**
  * @return JSON of tour table
  * Get all tour in the database
@@ -189,6 +189,7 @@ function getAllTour()
 
         //return array of objects in JSON
         echo json_encode($row);
+        // return json_encode($row);
     } catch (PDOException $e) {
         echo $e - getMessage();
     }
@@ -349,6 +350,44 @@ function getBookingFromAuth()
 
 }
 
+//get details of specific trip
+$app->get('/trip/:id','getTripFromId');
+function getTripFromId($id){
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode header
+  $Auth = $request->headers->get('Auth');
+
+  try {
+      //get connection to server
+      $dbh = getConnection();
+
+      //SQL statement
+      $sql = "SELECT trip.*,tour.Tour_Name , Sum(booking.Num_Adults + booking.Num_Concessions) as 'Seats_Taken'
+              FROM trip join booking join tour
+              WHERE trip.Trip_Id = booking.Trip_Id
+              And trip.Trip_Id = :id group by trip.Trip_Id;";
+
+      //Assign value and execute SQL statement
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindParam("id", $id);
+      $stmt->execute();
+
+      //fetch records into array of objects
+      $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+      //close connections
+      $dbh = null;
+
+      //return array of objects in JSON
+      echo json_encode($row);
+
+
+  } catch (PDOException $e) {
+      echo $e->getMessage();
+  }
+}
+
 //POST Methods
 //Register a customer into database
 //Accepts JSON as a detail of created account
@@ -421,6 +460,12 @@ function addNewReview(){
   //Use slim to get HTTP POST contents
   $request = \Slim\Slim::getInstance()->request();
 
+  //decode header
+  $Auth = $request->headers->get('Auth');
+
+  //pass header value into customer method and have it returned a customer Id
+  $id = getCustomerId($Auth);
+
   //decode JSON
   $q = json_decode($request->getBody());
 
@@ -440,7 +485,7 @@ function addNewReview(){
 
       //bind parameters to prevent sql injections
       $stmt->bindParam("Trip_Id", $q->Trip_Id);
-      $stmt->bindParam("Customer_Id",$q->Customer_Id);
+      $stmt->bindParam("Customer_Id",$id);
       $stmt->bindParam("Rating",$q->Rating);
       $stmt->bindParam("General_Feedback",$q->General_Feedback);
       $stmt->bindParam("Likes",$q->Likes);
@@ -452,11 +497,155 @@ function addNewReview(){
       echo $e->getMessage();
 }
 
-  echo json_encode($q);
-  echo "Successfully added review";
+  // echo json_encode($q);
+
+  echo '{"Status":"Completed"}';
+
+  return json_encode($q);
 
 
 }//End function addNewReview()
+
+$app->post('/customer/review/edit/:trip','editCustomerReview');
+function editCustomerReview($trip){
+
+  //Use slim to get HTTP POST contents
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode header
+  $Auth = $request->headers->get('Auth');
+
+  //pass header value into customer method and have it returned a customer Id
+  $id = getCustomerId($Auth);
+
+  //decode JSON
+  $q = json_decode($request->getBody());
+
+  //PDO
+  $sql = "UPDATE customer_review SET
+          Rating = :Rating,
+          General_Feedback = :General_Feedback,
+          Likes = :Likes,
+          Dislikes = :Dislikes
+          WHERE Customer_Id = :id
+          AND Trip_Id = :trip";
+
+  try {
+      $dbh = getConnection();
+      $stmt = $dbh->prepare($sql);
+
+      //bind parameters to prevent sql injections
+      $stmt->bindParam('trip',$trip);
+      $stmt->bindParam('id',$id);
+      $stmt->bindParam('Rating',$q->Rating);
+      $stmt->bindParam('General_Feedback',$q->General_Feedback);
+      $stmt->bindParam('Likes',$q->Likes);
+      $stmt->bindParam('Dislikes',$q->Dislikes);
+
+      $stmt->execute();
+      $dbh = null;
+
+      echo '{"Status":"Completed"}';
+
+  } catch(PDOException $e){
+      echo $e->getMessage();
+  }
+      // return json_encode($q);
+}
+
+
+
+$app->get('/review/','getCustomerReview');
+function getCustomerReview(){
+
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode header
+  $Auth = $request->headers->get('Auth');
+
+  //pass header value into customer method and have it returned a customer Id
+  $id = getCustomerId($Auth);
+
+
+  try {
+      //get connection to server
+      $dbh = getConnection();
+
+      //SQL statement
+      $sql = "SELECT * FROM Customer_Review WHERE Customer_Id =:id";
+
+      //Assign value and execute SQL statement
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindParam("id",$id);
+      $stmt->execute();
+
+      //fetch records into array of objects
+      $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+      //close connections
+      $dbh = null;
+
+      //return array of objects in JSON
+      echo '{"General_Feedback":"'.$row->General_Feedback.'",
+              "Likes":"'.$row->Likes.'",
+              "Dislikes":"'.$row->Dislikes.'"}';
+
+      // echo json_encode($row);
+
+      return $row->Customer_Id;
+      // echo '{"Email":"'.$row->Email.'"}';
+
+
+  } catch (PDOException $e) {
+      echo $e->getMessage();
+  }
+
+}
+
+$app->get('/review/all/','getAllReviewFromCustomer');
+function getAllReviewFromCustomer(){
+
+  $request = \Slim\Slim::getInstance()->request();
+
+  //decode header
+  $Auth = $request->headers->get('Auth');
+
+  //pass header value into customer method and have it returned a customer Id
+  $id = getCustomerId($Auth);
+
+  try {
+      //get connection to server
+      $dbh = getConnection();
+
+      //SQL statement
+      $sql = "SELECT customer_review.*,trip.Departure_Date,tour.Tour_Name
+      FROM Customer_Review join trip join tour
+      WHERE customer_review.Customer_Id =:id
+      AND trip.Trip_Id = customer_review.Trip_Id
+      AND trip.Tour_No = tour.Tour_No";
+
+      //Assign value and execute SQL statement
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindParam("id",$id);
+      $stmt->execute();
+
+      //fetch records into array of objects
+      $row = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+      //close connections
+      $dbh = null;
+
+      //return array of objects in JSON
+      echo json_encode($row);
+
+      // echo '{"Email":"'.$row->Email.'"}';
+
+
+  } catch (PDOException $e) {
+      echo $e->getMessage();
+  }
+
+}
 
 
 //TODO Finish the function later
@@ -467,16 +656,22 @@ function bookNewTrip() {
     //Use slim to get HTTP POST contents
     $request = \Slim\Slim::getInstance()->request();
 
+    //decode header
+    $Auth = $request->headers->get('Auth');
+
+    //pass header value into customer method and have it returned a customer Id
+    $id = getCustomerId($Auth);
+
     //decode JSON
     $q = json_decode($request->getBody());
 
     $sql = "INSERT INTO Booking SET
             Customer_Id = :Customer_Id,
             Trip_Id = :Trip_Id,
-            Booking_Date= :Booking_Date,
+            Booking_Date= CURDATE(),
             Num_Concessions = :Num_Concessions,
             Num_Adults = :Num_Adults,
-            Deposit_Amount= :Deposit_Amount";
+            Deposit_Amount= 0";
 
 
     try {
@@ -484,19 +679,18 @@ function bookNewTrip() {
         $stmt = $dbh->prepare($sql);
 
         //bind parameters to prevent sql injections
-        $stmt->bindParam("Customer_Id",$q->Customer_Id);
+        $stmt->bindParam("Customer_Id",$id);
         $stmt->bindParam("Trip_Id", $q->Trip_Id);
-        $stmt->bindParam("Booking_Date", $q->Booking_Date);
         $stmt->bindParam("Num_Concessions",$q->Num_Concessions);
         $stmt->bindParam("Num_Adults",$q->Num_Adults);
-        $stmt->bindParam("Deposit_Amount", $q->Deposit_Amount);
 
         $stmt->execute();
 
-        $dbh=null;
+        $dbh = null;
 
-        echo json_encode($q);
-        echo "Successfully booked!";
+        // echo json_encode($q);
+        // echo "Successfully booked!";
+        echo '{"Status":"Completed"}';
 
 
     } catch(PDOException $e){
@@ -561,7 +755,7 @@ function editAccountInfo($Email)
 //Accepts JSON as old & new password
 //Compare each of them to see if it fits the auth
 //if correct generate new authkey with salt and send it back as a new authkey
-$app->post('/customer/changepassword','changePassword');
+$app->post('/customer/changepassword/','changePassword');
 function changePassword(){
 
   //generate auth = 'Customer_Id','Email','Password_new'
