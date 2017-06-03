@@ -203,9 +203,13 @@ function getAvailableTrip($id){
     try{
         $dbh = getConnection();
 
-        $sql = "SELECT trip.* , Sum(booking.Num_Adults + booking.Num_Concessions) as 'Seats_Taken'
-FROM trip join booking join tour WHERE trip.Trip_Id AND Booking.trip_Id = trip.trip_id AND tour.Tour_No = trip.tour_No
-And tour.Tour_No = :id group by trip.Trip_Id;";
+        $sql = "SELECT trip.*, (booking.Num_Adults + booking.Num_Concessions) as 'Seats_Taken'
+                FROM trip left outer join booking
+                on trip.Trip_Id = Booking.Trip_Id 
+                where trip.Tour_No = :id
+                group by trip.Trip_Id;";
+
+        
 
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam("id",$id);
@@ -364,9 +368,9 @@ function getTripFromId($id){
 
       //SQL statement
       $sql = "SELECT trip.*,tour.Tour_Name , Sum(booking.Num_Adults + booking.Num_Concessions) as 'Seats_Taken'
-              FROM trip join booking join tour
-              WHERE trip.Trip_Id = booking.Trip_Id
-              And trip.Trip_Id = :id group by trip.Trip_Id;";
+              FROM tour join trip left outer join booking
+              on trip.Trip_Id = booking.Trip_Id and trip.Tour_No = tour.Tour_No
+              where trip.Trip_Id = :id group by trip.Trip_Id";
 
       //Assign value and execute SQL statement
       $stmt = $dbh->prepare($sql);
@@ -375,6 +379,11 @@ function getTripFromId($id){
 
       //fetch records into array of objects
       $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+        if($row->Seats_Taken == null)
+        {
+            $row->Seats_Taken = 0;
+        }
 
       //close connections
       $dbh = null;
