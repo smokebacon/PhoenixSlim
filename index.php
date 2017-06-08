@@ -118,7 +118,7 @@ function getAuth()
 
 function generateAuthKey($Email,$Password){
 
-  $auth= md5($Email.$Password);
+  $auth= md5(strtolower($Email).$Password);
   return $auth;
 
 }
